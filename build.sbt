@@ -18,3 +18,6 @@ libraryDependencies ++= Seq(
 libraryDependencies += "org.mockito" % "mockito-core" % "1.9.5" % "test"
 
 resolvers += "scalaz-bintray" at "https://dl.bintray.com/scalaz/releases"
+
+
+HAHAHA ART
