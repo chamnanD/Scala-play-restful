@@ -64,8 +64,7 @@
 
 ##### Example
     
-    curl -X POST http://localhost:9000/tasks -H "Content-Type: application/json" 
-    -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
+    curl -X POST http://localhost:9000/tasks -H "Content-Type: application/json" -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
 
 ##### Return 
     "Success"
@@ -80,8 +79,7 @@
 
 ##### Example
     
-    curl -X POST http://localhost:9000/tasks/1 -H "Content-Type: application/json" 
-    -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
+    curl -X POST http://localhost:9000/tasks/1 -H "Content-Type: application/json" -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
     
 ##### Update status "PUT /tasks/:id/:status"
 

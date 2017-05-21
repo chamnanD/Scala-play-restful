@@ -18,6 +18,7 @@ object TaskAction extends Enumeration {
     type TaskAction = JsValue
     val Success = JsString("Success")
     val InvalidStatus = JsString("Status must be 0(Pending) or 1(Done)")
+    val InvalidForm = JsString("Something went wrong please input correct format")
     val NotHaveTask = JsString("Not have Task ID")
     val UpdateSuccess = JsString("Update successfully")
     val DeleteSuccess = JsString("Delete successfully")
@@ -27,11 +28,11 @@ trait TaskController extends Controller {
     self: TaskServiceComponent =>
 
     def createTask = Action(parse.json) {request =>
-        val subject: String = (request.body \ "subject").as[String]
-        val content: String = (request.body \ "content").as[String]
-        val statusInt: Int = (request.body \ "status").as[Int]
-        if (statusInt != 0 && statusInt != 1) {
-            BadRequest(TaskAction.InvalidStatus)
+        val subject: String = (request.body \ "subject").getOrElse(JsString("")).toString()
+        val content: String = (request.body \ "content").getOrElse(JsString("")).toString()
+        val statusInt: Int = (request.body \ "status").getOrElse(JsNumber(-1)).as[Int]
+        if (isInvalid(subject, content, statusInt)) {
+            BadRequest(TaskAction.InvalidForm)
         } else {
             val status: TaskStatus = if (statusInt == 1) TaskStatus.Done else TaskStatus.Pending
             val task = Task(Option.empty, subject, content, status)
@@ -41,13 +42,13 @@ trait TaskController extends Controller {
     }
 
     def updateTask(id: Long) = Action(parse.json) {request =>
-        val subject: String = (request.body \ "subject").as[String]
-        val content: String = (request.body \ "content").as[String]
-        val statusInt: Int = (request.body \ "status").as[Int]
+        val subject: String = (request.body \ "subject").getOrElse(JsString("")).toString()
+        val content: String = (request.body \ "content").getOrElse(JsString("")).toString()
+        val statusInt: Int = (request.body \ "status").getOrElse(JsNumber(-1)).as[Int]
         if (taskService.tryFindById(id).isEmpty) {
             BadRequest(TaskAction.NotHaveTask)
-        } else if (statusInt != 0 && statusInt != 1) {
-            BadRequest(TaskAction.InvalidStatus)
+        } else if (isInvalid(subject, content, statusInt)) {
+            BadRequest(TaskAction.InvalidForm)
         } else {
             val status: TaskStatus = if (statusInt == 1) TaskStatus.Done else TaskStatus.Pending
             val task = Task(Option(id), subject, content, status)
@@ -88,6 +89,10 @@ trait TaskController extends Controller {
         } else {
             BadRequest(TaskAction.NotHaveTask)
         }
+    }
+
+    def isInvalid(subject: String, content: String, status: Int): Boolean = {
+        subject.isEmpty || content.isEmpty || status == -1
     }
 
 }
