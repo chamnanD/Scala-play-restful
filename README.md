@@ -7,7 +7,7 @@
     sbt test
     
 ## CRUD
-##### parameters
+##### Parameters
 
     id: Long
     subject: String
@@ -17,7 +17,7 @@
 ### Get All Task "GET /tasks"
 ##### Example
     curl -X GET http://localhost:9000/tasks 
-#####return
+##### Return
     [
       {
         "id": 1,
@@ -48,7 +48,7 @@
 ### Get Task by ID "GET /tasks/:id"
 ##### Example
     curl -X GET http://localhost:9000/tasks/1
-#####return
+##### Return
       {
         "id": 1,
         "subject": "Subject1",
@@ -67,7 +67,7 @@
     curl -X POST http://localhost:9000/tasks -H "Content-Type: application/json" 
     -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
 
-#####Return 
+##### Return 
     "Success"
     
 ### Update Data
@@ -89,12 +89,12 @@
     
     curl -X PUT http://localhost:9000/tasks/1/1 
     
-#####Return 
+##### Return 
     "Update successfully"
     
 ### Delete "DELETE /tasks/:id"
 ##### Example
     curl -X DELETE http://localhost:9000/tasks/1 
     
-#####Return 
+##### Return 
     "Delete successfully"
