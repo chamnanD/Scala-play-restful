@@ -10,9 +10,9 @@
 ##### Parameters
 
     id: Long
-    subject: String
-    content: String
-    status: Int (0 or 1)
+    subject: String #can not Empty
+    content: String #can not Empty
+    status: Int #(0 or 1)
     
 ### Get All Task "GET /tasks"
 ##### Example
@@ -64,7 +64,7 @@
 
 ##### Example
     
-    curl -X POST http://localhost:9000/tasks -H "Content-Type: application/json" -d "{\"subject\": \"Test subject 1\", \"content\": \"Test content 1\", \"status\": 0}"
+    curl -X POST http://localhost:9000/tasks -H "Content-Type: application/json" -d "{\"subject\": \"Test update subject 1\", \"content\": \"Test update content 1\", \"status\": 0}"
 
 ##### Return 
     "Success"
