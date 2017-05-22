@@ -49,7 +49,7 @@ class TaskControllerTest {
 
         val result: Future[Result] = taskController.createTask(request)
 
-        assertEquals(TaskAction.InvalidStatus.toString(), contentAsString(result))
+        assertEquals(TaskAction.InvalidForm.toString(), contentAsString(result))
 
     }
 

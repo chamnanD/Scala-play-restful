@@ -92,7 +92,7 @@ trait TaskController extends Controller {
     }
 
     def isInvalid(subject: String, content: String, status: Int): Boolean = {
-        subject.isEmpty || content.isEmpty || status == -1
+        subject.isEmpty || content.isEmpty || (status != 0 && status != 1)
     }
 
 }
